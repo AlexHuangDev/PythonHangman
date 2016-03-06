@@ -148,12 +148,16 @@ def handle_user_input(answer_word, hangman_lives):
 def already_guessed():
     global letters_guessed
     while True:
-        user_guess = input("Guess the word or a letter: ")
-        if user_guess in letters_guessed:
-            print("Guess a different string, you already guessed that one!")
-        else:
-            letters_guessed += user_guess
-            return str(user_guess).lower()
+        try:
+            user_guess = str(input("Guess the word or a letter: ")).lower()
+            if user_guess.isalpha():
+                if user_guess in letters_guessed:
+                    print("Guess a different string, you already guessed that one!")
+                else:
+                    letters_guessed += user_guess
+                    return user_guess
+        except:
+            print("Invalid input")
 
 
 def game_over(answer_word):
